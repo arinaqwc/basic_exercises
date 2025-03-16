@@ -12,7 +12,13 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-# ???
+name_count={}
+for student in students:
+    name=student['first_name']
+    name_count[name]=name_count.get(name,0)+1
+for name, count in name_count.items():
+    print(f'{name}: {count}')
+
 
 
 # Задание 2
@@ -26,7 +32,13 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-# ???
+
+name_count={}
+for student in students:
+    name=student['first_name']
+    name_count[name]=name_count.get(name,0)+1
+    name = next((name for name, count in name_count.items() if count == max(name_count.values())))
+print(f'Самое распростаненное имя в классе: {name}')
 
 
 # Задание 3
@@ -51,7 +63,15 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
+k=0
+for clas in school_students:
+    name_count={}
+    k+=1
+    for student in clas:
+        name = student['first_name']
+        name_count[name]=name_count.get(name,0)+1
+        name=next(name for name,count in name_count.items() if count==max(name_count.values()))
+    print(f'Самое распространенное имя в классе {k}: {name}')
 
 
 # Задание 4
@@ -72,7 +92,17 @@ is_male = {
     'Миша': True,
     'Даша': False,
 }
-# ???
+for clas in school:
+    clas_name=clas['class']
+    girls=0
+    boys=0
+    for student in clas['students']:
+        name = student['first_name']
+        if is_male[name]:
+            boys+=1
+        else:
+            girls+=1
+    print(f'Класс {clas_name}: девочек {girls}, мальчиков {boys}')
 
 
 # Задание 5
@@ -91,5 +121,18 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
-# ???
+for clas in school:
+    name_class=clas['class']
+    boys=0
+    girls=0
+    for student in clas['students']:
+        name=student['first_name']
+        if is_male[name]:
+            boys+=1
+        else:
+            girls+=1
+    if boys>girls:
+        print(f'В классе {name_class} больше всего мальчиков')
+    else:
+        print(f'В классе {name_class} больше всего девочек')
 
