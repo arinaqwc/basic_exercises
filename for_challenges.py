@@ -28,9 +28,9 @@ is_male = {
     'Маша': False,
 }
 names = ['Оля', 'Петя', 'Вася', 'Маша']
-for name in is_male:
-    if name in names:
-        print(f'{name} {nameis_male[name]}')
+for name in names:
+    if is_male[name] is True:
+        print(name, is_male[name])
 
 
 # Задание 4
@@ -45,10 +45,8 @@ groups = [
     ['Вася', 'Маша', 'Саша', 'Женя'],
     ['Оля', 'Петя', 'Гриша'],
 ]
-k=0
 print(f'Всего {len(groups)} группы')
-for group in groups:
-    k+=1
+for k, group in enumerate(groups, start=1):
     print(f'Группа {k}: {len(group)} человека')
 
 

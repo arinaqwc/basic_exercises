@@ -63,14 +63,12 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-k=0
-for clas in school_students:
+for k, clas in enumerate(school_students, start=1):
     name_count={}
-    k+=1
     for student in clas:
         name = student['first_name']
         name_count[name]=name_count.get(name,0)+1
-        name=next(name for name,count in name_count.items() if count==max(name_count.values()))
+        name = max(name_count, key=name_count.get)
     print(f'Самое распространенное имя в классе {k}: {name}')
 
 
@@ -121,18 +119,18 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
+class_count={}
 for clas in school:
-    name_class=clas['class']
-    boys=0
-    girls=0
-    for student in clas['students']:
+    class_name=clas['class']
+    students=clas['students']
+    class_count[class_name]={'boys': 0, 'girls':0}
+    for student in students:
         name=student['first_name']
         if is_male[name]:
-            boys+=1
+            class_count[class_name]['boys']+=1
         else:
-            girls+=1
-    if boys>girls:
-        print(f'В классе {name_class} больше всего мальчиков')
-    else:
-        print(f'В классе {name_class} больше всего девочек')
-
+            class_count[class_name]['girls']+=1
+    max_boys=max(class_count, key=lambda x: class_count[x]['boys'])
+    max_girls=max(class_count, key=lambda x: class_count[x]['girls'])
+print(f'Больше всего мальчиков в классе {max_boys}')   
+print(f'Больше всего мальчиков в классе {max_girls}') 
