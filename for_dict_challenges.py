@@ -12,7 +12,13 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-# ???
+name_count={}
+for student in students:
+    name=student['first_name']
+    name_count[name]=name_count.get(name,0)+1
+for name, count in name_count.items():
+    print(f'{name}: {count}')
+
 
 
 # Задание 2
@@ -26,7 +32,13 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-# ???
+
+name_count={}
+for student in students:
+    name=student['first_name']
+    name_count[name]=name_count.get(name,0)+1
+    name = next((name for name, count in name_count.items() if count == max(name_count.values())))
+print(f'Самое распростаненное имя в классе: {name}')
 
 
 # Задание 3
@@ -51,7 +63,13 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
+for k, clas in enumerate(school_students, start=1):
+    name_count={}
+    for student in clas:
+        name = student['first_name']
+        name_count[name]=name_count.get(name,0)+1
+        name = max(name_count, key=name_count.get)
+    print(f'Самое распространенное имя в классе {k}: {name}')
 
 
 # Задание 4
@@ -72,7 +90,17 @@ is_male = {
     'Миша': True,
     'Даша': False,
 }
-# ???
+for clas in school:
+    clas_name=clas['class']
+    girls=0
+    boys=0
+    for student in clas['students']:
+        name = student['first_name']
+        if is_male[name]:
+            boys+=1
+        else:
+            girls+=1
+    print(f'Класс {clas_name}: девочек {girls}, мальчиков {boys}')
 
 
 # Задание 5
@@ -91,5 +119,18 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
-# ???
-
+class_count={}
+for clas in school:
+    class_name=clas['class']
+    students=clas['students']
+    class_count[class_name]={'boys': 0, 'girls':0}
+    for student in students:
+        name=student['first_name']
+        if is_male[name]:
+            class_count[class_name]['boys']+=1
+        else:
+            class_count[class_name]['girls']+=1
+    max_boys=max(class_count, key=lambda x: class_count[x]['boys'])
+    max_girls=max(class_count, key=lambda x: class_count[x]['girls'])
+print(f'Больше всего мальчиков в классе {max_boys}')   
+print(f'Больше всего мальчиков в классе {max_girls}') 
